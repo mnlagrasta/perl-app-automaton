@@ -1,0 +1,27 @@
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+
+use App::Automatan;
+use Getopt::Std;
+use File::HomeDir;
+use Data::Dumper;
+
+
+my $opts = {};
+getopts('vtc:', $opts);
+
+# find config
+my $conf_file;
+if ($opts->{c}) {
+    $conf_file = $opts->{c};
+} else {
+	$conf_file = File::HomeDir->my_home . '/.automatan';
+}
+
+my $a = App::Automatan->new(conf_file => $conf_file, debug => $opts->{v});
+$a->check_sources();
+$a->apply_filters();
+$a->dedupe();
+$a->do_actions();
