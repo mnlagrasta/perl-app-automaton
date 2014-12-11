@@ -101,6 +101,11 @@ Action plugins will usually have a "target" flag to specify where the downloaded
 In my personal config, I have my NZB files dropped into my news reader's "watch" folder which will execute that download.
 I have my video files targets set to drop right into a folder on my Plex media server, so they are waiting for me at home.
 
+## Execution
+
+Once it's installed and you have a config file, you can run it using the "automatan" wrapper script.
+By default, it will look for a config file named '.automatan' in your home directory. You can also specify a config file using the -c filename parameter. You can also get some verbose output with -v, but there isn't much there yet.
+
 ## Creating New Plugins
 
 Feel free to create additional plugins. I'm currently re-evaluating this, but they must meet the following criteria:
