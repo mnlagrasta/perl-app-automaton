@@ -4,7 +4,7 @@ App::Automatan - Execute various tasks based on input from various sources
 
 # VERSION
 
-version 0.001
+version 0.143450
 
 # SYNOPSIS
 
