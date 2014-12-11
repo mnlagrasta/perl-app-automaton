@@ -1,5 +1,7 @@
 package App::Automatan::Plugin::Action::NZB;
 
+# ABSTRACT: Download module for nzb files
+
 use strict;
 use warnings;
 use Moo;
@@ -51,3 +53,17 @@ sub get_name {
 }
 
 1;
+
+__END__
+
+=head1 SYNOPSIS
+
+This module is intended to be used from within the App::Automatan application.
+
+It identifies and downloads links from the following newsgroup search services:
+ * www.nzb-rss.com
+ * www.nzbsearch.net
+
+=head1 SEE ALSO
+
+L<App::Automatan>

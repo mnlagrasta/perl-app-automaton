@@ -1,5 +1,7 @@
 package App::Automatan::Plugin::Source::IMAP;
 
+# ABSTRACT: IMAP email input module
+
 use strict;
 use warnings;
 
@@ -43,3 +45,15 @@ sub go {
 }
 
 1;
+
+__END__
+
+=head1 SYNOPSIS
+
+This module is intended to be used from within the App::Automatan application.
+
+It retrieves messages from an IMAP email account and adds them to the queue to be processed.
+
+=head1 SEE ALSO
+
+L<App::Automatan>

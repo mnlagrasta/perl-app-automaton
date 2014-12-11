@@ -1,5 +1,7 @@
 package App::Automatan::Plugin::Filter::Unshorten;
 
+# ABSTRACT: Expansion of shortneded URLs
+
 use strict;
 use warnings;
 use Moo;
@@ -46,3 +48,22 @@ sub go {
 }
 
 1;
+
+__END__
+
+=head1 SYNOPSIS
+
+This module is intended to be used from within the App::Automatan application.
+
+It expands shortened URLs to their full size so that other modules may identify them.
+It currently supports the following shortening services:
+ * Twitter t.co
+ * Google goo.gl
+ * Bitly bit.ly
+ * BitDo bit.do
+ * Owly ow.ly
+ * Trim tr.im
+
+=head1 SEE ALSO
+
+L<App::Automatan>

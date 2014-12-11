@@ -1,3 +1,6 @@
+# ABSTRACT: Download module for YouTube videos
+# PODNAME: App::Automatan::Plugin::Action::YouTube
+
 # NOTE:
 # This first portion of this code, the package "WWWYouTubeDownload", is copied directly from
 # the CPAN module WWW::YouTube::Download by XAICRON (Yuji Shimada) and all credit goes to him.
@@ -400,3 +403,15 @@ sub go {
 }
 
 1;
+
+__END__
+
+=head1 SYNOPSIS
+
+This module is intended to be used from within the App::Automatan application.
+
+It identifies and downloads links from youtube.com.
+
+=head1 SEE ALSO
+
+L<App::Automatan>

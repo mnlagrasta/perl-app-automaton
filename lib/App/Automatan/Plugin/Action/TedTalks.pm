@@ -1,5 +1,7 @@
 package App::Automatan::Plugin::Action::TedTalks;
 
+# ABSTRACT: Download module for Ted Talk videos
+
 use strict;
 use warnings;
 use Moo;
@@ -26,6 +28,7 @@ sub go {
 			my $get_link;
 			foreach my $link (@links) {
 				#TODO: I'd like to make this more sophisticated, with less assumption
+				#TODO: Also, maybe a flag to specify language or format preference, even audio only
 				if ($link =~ m/-480p.mp4/) {
 					$get_link = $link;
 				}
@@ -63,3 +66,17 @@ sub get_name {
 }
 
 1;
+
+__END__
+
+=head1 SYNOPSIS
+
+This module is intended to be used from within the App::Automatan application.
+
+It identifies and downloads links from the Ted Talks website www.ted.com.
+This is done with the help of the www.offliberty.com service, which returns
+all available links. A guess is then made to get the best quality video.
+
+=head1 SEE ALSO
+
+L<App::Automatan>

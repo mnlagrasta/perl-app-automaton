@@ -1,5 +1,9 @@
 #!/usr/bin/perl
 
+# PODNAME: App::Automatan
+
+# ABSTRACT: shell script wrapper for App::Automatan
+
 use strict;
 use warnings;
 
