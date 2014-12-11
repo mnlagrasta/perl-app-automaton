@@ -377,6 +377,7 @@ package App::Automatan::Plugin::Action::YouTube;
 use strict;
 use warnings;
 use Moo;
+use File::Spec::Functions;
 
 use Data::Dumper;
 
@@ -391,7 +392,7 @@ sub go {
 		my ($url) = $bit =~ /(https:\/\/www.youtube\.com\/watch\?v=[a-z,A-Z,0-9]*)/;
 		if ($url) {
 			my $client = WWWYouTubeDownload->new();
-			$client->download( $url, { filename => '{title}.{suffix}' } );
+			$client->download( $url, { filename => catfile($target, '{title}.{suffix}') } );
 		}
 	}
 	
