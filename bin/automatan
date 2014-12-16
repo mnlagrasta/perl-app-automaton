@@ -10,6 +10,7 @@ use warnings;
 use App::Automatan;
 use Getopt::Std;
 use File::HomeDir;
+use File::Spec::Functions;
 use Data::Dumper;
 
 
@@ -21,7 +22,7 @@ my $conf_file;
 if ($opts->{c}) {
     $conf_file = $opts->{c};
 } else {
-	$conf_file = File::HomeDir->my_home . '/.automatan';
+	$conf_file = catfile( File::HomeDir->my_home, '.automatan' );
 }
 
 my $a = App::Automatan->new(conf_file => $conf_file, debug => $opts->{v});
