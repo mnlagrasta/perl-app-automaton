@@ -388,6 +388,7 @@ sub go {
 	my $self = shift;
 	my $in = shift;
 	my $bits = shift;
+	my $d = $in->{debug};
 	
 	my $target = $in->{target};
 	
@@ -401,10 +402,18 @@ sub go {
 			next unless $video_data;
 			my $target_file = catfile($target, $video_data->{title} . '.' . $video_data->{suffix} );
 			next if -e $target_file;
+			logger($d, "downloading $url to $target_file");
 			eval{$client->download( $url, { filename => $target_file } );}
 		}
 	}
 	
+	return 1;
+}
+
+sub logger {
+	my $level = shift;
+	my $message = shift;
+	print "$message\n" if $level;
 	return 1;
 }
 

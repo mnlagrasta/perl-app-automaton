@@ -15,6 +15,7 @@ sub go {
 	my $in = shift;
 	my $bits = shift;
 	my $target = $in->{target} || '.';
+	my $d = $in->{debug};
 	
 	my @patterns = (
 		'http:\/\/www.nzbsearch.net\/nzb_get.aspx\?mid=[a-z,A-Z,0-9]*',
@@ -23,17 +24,17 @@ sub go {
 	my $pattern_string = join('|', @patterns);
 	
 	foreach my $bit (@$bits) {
-		my @matches = $bit =~ /$pattern_string/g;
-		foreach my $match (@matches) {
-			next unless $match;
-			my $name = $self->get_name($match);
+		my @urls = $bit =~ /$pattern_string/g;
+		foreach my $url (@urls) {
+			my $name = $self->get_name($url);
 			my $target_file = catfile($target, $name);
 			next if -e $target_file;
 			my $ua = LWP::UserAgent->new();
-			$ua->mirror($match, $target_file);
+			logger($d, "downloading $url to $target_file");
+			$ua->mirror($url, $target_file);
 		}
 	}
-	
+		
     return(1);
 }
 
@@ -52,6 +53,13 @@ sub get_name {
 	}
 	
 	return $name;
+}
+
+sub logger {
+	my $level = shift;
+	my $message = shift;
+	print "$message\n" if $level;
+	return 1;
 }
 
 1;

@@ -10,19 +10,30 @@ sub go {
     my $self = shift;
     my $in = shift;
     my $parent = shift;
+	
+	my $d = $in->{debug};
 
     my $file = $in->{path};
+	logger($d, "Reading file: $file");
     open(my $fh, "<", $in->{path}) or die $!;
     my @lines = <$fh>;
     close($fh);
 	
 	if ($in->{delete}) {
+		logger($d, "deleting file: $file");
 		unlink $file;
 	}
 	
     chomp(@lines);
 
     return(@lines);
+}
+
+sub logger {
+	my $level = shift;
+	my $message = shift;
+	print "$message\n" if $level;
+	return 1;
 }
 
 1;

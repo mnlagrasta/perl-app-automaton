@@ -16,11 +16,11 @@ sub go {
 	my $in     = shift;
 	my $bits   = shift;
 	my $target = $in->{target} || '.';
+	my $d = $in->{debug};
 
 	my $ua = LWP::UserAgent->new();
 
-	my @patterns
-		= ( "t.ted.com\/[a-z,A-Z,0-9]*", "www.ted.com\/talks\/[a-z,A-Z,0-9,_]+" );
+	my @patterns = ( "http[s]?:\/\/t.ted.com\/[a-z,A-Z,0-9]*", "www.ted.com\/talks\/[a-z,A-Z,0-9,_]+" );
 
 	my $pattern_string = join( '|', @patterns );
 
@@ -30,12 +30,14 @@ sub go {
 		foreach my $match (@matches) {
 			next unless $match;
 			my $name = $self->get_name($match);
+			logger($d, "getting links for $match");
 			my $url = $self->get_link($match);
 			#TODO: what if url is undef?'
 			die "could not determine url for $match" unless $url;
 			my $target_file = catfile($target, $name);
 			next if -e $target_file;
 			my $ua   = LWP::UserAgent->new();
+			logger($d, "downloading $url to $target_file");
 			$ua->mirror( $url, $target_file );
 		}
 
@@ -78,6 +80,13 @@ sub get_name {
 	}
 
 	return $name;
+}
+
+sub logger {
+	my $level = shift;
+	my $message = shift;
+	print "$message\n" if $level;
+	return 1;
 }
 
 1;

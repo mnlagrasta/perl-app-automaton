@@ -14,6 +14,7 @@ use Data::Dumper;
 sub go {
 	my $self = shift;
 	my $in   = shift;
+	my $d = $in->{debug};
 
 	my $server = $in->{server} . ':' . $in->{port};
 
@@ -29,21 +30,32 @@ sub go {
 
 	# Get messages
 	my $nm = $imap->select('INBOX');
+	logger($d, "Found $nm messages");
 	for ( my $i = 1; $i <= $nm; $i++ ) {
-		print "processing message $i\n";
-		my $message = $imap->get( $i, 2 ) || $imap->get($i);
+		logger($d, "getting message $i");
+		#my $message = $imap->get( $i, 2 ) || $imap->get($i);
+		my $message = $imap->get($i);
 		die("imap message undef") unless defined $message;
 		
 		push( @output, $message );
 		
 		if ($in->{delete}) {
 			# delete message
+			logger($d, "Deleting message $i");
 			$imap->delete($i);
 		}
 		
 	}
 	chomp(@output);    #probably not needed, maybe even a bad idea
 	return (@output);
+}
+
+
+sub logger {
+	my $level = shift;
+	my $message = shift;
+	print "$message\n" if $level;
+	return 1;
 }
 
 1;
