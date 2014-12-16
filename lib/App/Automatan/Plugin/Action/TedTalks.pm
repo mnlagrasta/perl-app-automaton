@@ -20,25 +20,21 @@ sub go {
 
 	my $ua = LWP::UserAgent->new();
 
-	my @patterns = ( "http[s]?:\/\/t.ted.com\/[a-z,A-Z,0-9]*", "www.ted.com\/talks\/[a-z,A-Z,0-9,_]+" );
-
-	my $pattern_string = join( '|', @patterns );
-
 	foreach my $bit (@$bits) {
-		my @matches = $bit =~ /$pattern_string/g;
+		my @urls = $bit =~ /www.ted.com\/talks\/[a-z,A-Z,0-9,_]+/g;
 		
-		foreach my $match (@matches) {
-			next unless $match;
-			my $name = $self->get_name($match);
-			logger($d, "getting links for $match");
-			my $url = $self->get_link($match);
+		foreach my $url (@urls) {
+			next unless $url;
+			my $name = $self->get_name($url);
+			logger($d, "getting links for $url");
+			my $new_url = $self->get_link($url);
 			#TODO: what if url is undef?'
-			die "could not determine url for $match" unless $url;
+			die "could not determine new url for $url" unless $new_url;
 			my $target_file = catfile($target, $name);
 			next if -e $target_file;
 			my $ua   = LWP::UserAgent->new();
-			logger($d, "downloading $url to $target_file");
-			$ua->mirror( $url, $target_file );
+			logger($d, "downloading $new_url to $target_file");
+			$ua->mirror( $new_url, $target_file );
 		}
 
 	}
