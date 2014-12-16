@@ -41,17 +41,17 @@ sub check_sources {
     
     my $sources = $self->{conf}->{sources};
     foreach my $name (keys %$sources) {
-	my $source = $sources->{$name};
-	next if $source->{bypass};
-	$self->logger("checking source: $name");
-	my $mod = 'App::Automatan::Plugin::Source::' . $source->{type};
-	load $mod;
-	my $s = eval {$mod->new()};
-	die $! unless $s;
-	die $! unless $s->can('go');
-	push(@{$self->{found_bits}}, $s->go($source));
+		my $source = $sources->{$name};
+		next if $source->{bypass};
+		$self->logger("checking source: $name");
+		my $mod = 'App::Automatan::Plugin::Source::' . $source->{type};
+		load $mod;
+		my $s = eval {$mod->new()};
+		die $! unless $s;
+		die $! unless $s->can('go');
+		push(@{$self->{found_bits}}, $s->go($source));
     }
-    
+
     return $1;
 }
 
@@ -68,7 +68,7 @@ sub apply_filters {
 		my $a = eval {$mod->new()};
 		die $! unless $a;
 		die $! unless $a->can('go');
-		$self->found_bits($a->go($filter, $self->found_bits()));
+		$a->go($filter, $self->{found_bits});
 	}
 	
 	return 1;
@@ -89,7 +89,7 @@ sub do_actions {
 		die $! unless $a;
 		die $! unless $a->can('go');
 		my $r = $a->go($action, $self->found_bits());
-		$self->logger("Unsuccessful return from action: $name");
+		$self->logger("Unsuccessful return from action: $name") unless $r;
 	}
 	
     return 1;

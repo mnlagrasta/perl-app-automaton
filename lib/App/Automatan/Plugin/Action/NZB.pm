@@ -17,13 +17,13 @@ sub go {
 	my $target = $in->{target} || '.';
 	
 	my @patterns = (
-		'(http:\/\/www.nzbsearch.net\/nzb_get.aspx\?mid=[a-z,A-Z,0-9]*)',
-		'(https:\/\/www.nzb-rss.com\/nzb\/.*nzb)'
+		'http:\/\/www.nzbsearch.net\/nzb_get.aspx\?mid=[a-z,A-Z,0-9]*',
+		'https:\/\/www.nzb-rss.com\/nzb\/.*nzb'
 	);
 	my $pattern_string = join('|', @patterns);
 	
 	foreach my $bit (@$bits) {
-		my @matches = $bit =~ $pattern_string;
+		my @matches = $bit =~ /$pattern_string/g;
 		foreach my $match (@matches) {
 			next unless $match;
 			my $name = $self->get_name($match);
