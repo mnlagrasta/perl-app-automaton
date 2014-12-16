@@ -43,6 +43,7 @@ sub check_sources {
     foreach my $name (keys %$sources) {
 		my $source = $sources->{$name};
 		next if $source->{bypass};
+		$source->{debug} = $self->{debug};
 		$self->logger("checking source: $name");
 		my $mod = 'App::Automatan::Plugin::Source::' . $source->{type};
 		load $mod;
@@ -62,6 +63,7 @@ sub apply_filters {
 	foreach my $name (keys %{$filters}) {
 		my $filter = $filters->{$name};
 		next if $filter->{bypass};
+		$filter->{debug} = $self->{debug};
 		$self->logger("Applying filter: $name");
 		my $mod = 'App::Automatan::Plugin::Filter::' . $filter->{type};
 		load $mod;
@@ -82,6 +84,7 @@ sub do_actions {
 	foreach my $name (keys %$actions) {
 		my $action = $actions->{$name};
 		next if $action->{bypass};
+		$action->{debug} = $self->{debug};
 		$self->logger("Executing action: $name");
 		my $mod = 'App::Automatan::Plugin::Action::' . $action->{type};
 		load $mod;
