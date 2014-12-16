@@ -33,8 +33,10 @@ sub go {
 			my $url = $self->get_link($match);
 			#TODO: what if url is undef?'
 			die "could not determine url for $match" unless $url;
+			my $target_file = catfile($target, $name);
+			next if -e $target_file;
 			my $ua   = LWP::UserAgent->new();
-			$ua->mirror( $url, catfile( $target, $name ) );
+			$ua->mirror( $url, $target_file );
 		}
 
 	}
@@ -47,7 +49,6 @@ sub get_link {
 	my $url = shift;
 
 	my @links = off( $url, video_file => 1 );
-	print Dumper(\@links);
 
 	my $get_link;
 	foreach my $link (@links) {

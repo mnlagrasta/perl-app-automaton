@@ -27,8 +27,10 @@ sub go {
 		foreach my $match (@matches) {
 			next unless $match;
 			my $name = $self->get_name($match);
+			my $target_file = catfile($target, $name);
+			next if -e $target_file;
 			my $ua = LWP::UserAgent->new();
-			$ua->mirror($match, catfile($target, $name));
+			$ua->mirror($match, $target_file);
 		}
 	}
 	

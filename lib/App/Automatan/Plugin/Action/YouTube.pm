@@ -394,10 +394,14 @@ sub go {
 	foreach my $bit  (@$bits) {
 		my @urls = $bit =~ /http[s]?:\/\/www.youtube\.com\/watch\?v=.{11}/g;
 		foreach my $url (@urls) {
-			print Dumper($url);
 			my $client = WWWYouTubeDownload->new();
+			my $video_data;
+			eval { $video_data = $client->prepare_download($url); }; warn "Error with $url\n".$@ if $@;
 			#TODO: Report errors
-			eval{$client->download( $url, { filename => catfile($target, '{title}.{suffix}') } );}
+			next unless $video_data;
+			my $target_file = catfile($target, $video_data->{title} . '.' . $video_data->{suffix} );
+			next if -e $target_file;
+			eval{$client->download( $url, { filename => $target_file } );}
 		}
 	}
 	
