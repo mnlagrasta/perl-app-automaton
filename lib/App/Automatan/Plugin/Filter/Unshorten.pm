@@ -22,6 +22,7 @@ sub go {
 		"http:\/\/ow.ly\/[a-z,A-Z,0-9]*", # http://ow.ly/FiTXV
 		"https:\/\/tr.im\/[a-z,A-Z,0-9]*", # https://tr.im/23498
 		"http[s]?:\/\/youtu.be\/.{11}",
+		"http[s]?:\/\/t.ted.com\/[a-z,A-Z,0-9]*",
 	);
 	
 	my $pattern_string = join('|', @patterns);
@@ -58,6 +59,7 @@ It currently supports the following shortening services:
  * Owly ow.ly
  * Trim tr.im
  * YouTube youtu.be
+ * Ted.com t.ted.com
 
 =head1 SEE ALSO
 
