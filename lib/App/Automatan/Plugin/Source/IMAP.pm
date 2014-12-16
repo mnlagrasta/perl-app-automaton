@@ -31,7 +31,9 @@ sub go {
 	my $nm = $imap->select('INBOX');
 	for ( my $i = 1; $i <= $nm; $i++ ) {
 		print "processing message $i\n";
-		my $message = $imap->get( $i, 2 ) . '' or die $imap->errstr;
+		my $message = $imap->get( $i, 2 ) || $imap->get($i);
+		die("imap message undef") unless defined $message;
+		
 		push( @output, $message );
 		
 		if ($in->{delete}) {
