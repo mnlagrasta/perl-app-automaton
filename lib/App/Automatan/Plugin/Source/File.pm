@@ -14,8 +14,8 @@ sub go {
 	my $d = $in->{debug};
 
     my $file = $in->{path};
-	logger($d, "Reading file: $file");
-    open(my $fh, "<", $in->{path}) or die $!;
+	logger($d, "Processing file: $file");
+    open(my $fh, "<", $in->{path}) || return 1;
     my @lines = <$fh>;
     close($fh);
 	
