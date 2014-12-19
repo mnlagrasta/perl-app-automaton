@@ -1,8 +1,51 @@
-# ABSTRACT: Download module for YouTube videos
-# PODNAME: App::Automatan::Plugin::Action::YouTube
+package App::Automatan::Plugin::Action::YouTube;
 
-# NOTE:
-# This first portion of this code, the package "WWWYouTubeDownload", is copied directly from
+# ABSTRACT: Download module for YouTube videos
+
+use strict;
+use warnings;
+use Moo;
+use File::Spec::Functions;
+
+use Data::Dumper;
+
+sub go {
+	my $self = shift;
+	my $in = shift;
+	my $bits = shift;
+	my $d = $in->{debug};
+	
+	my $target = $in->{target};
+	
+	foreach my $bit  (@$bits) {
+		my @urls = $bit =~ /http[s]?:\/\/www.youtube\.com\/watch\?v=.{11}/g;
+		foreach my $url (@urls) {
+			my $client = WWWYouTubeDownload->new();
+			my $video_data;
+			eval { $video_data = $client->prepare_download($url); }; warn "Error with $url\n".$@ if $@;
+			#TODO: Report errors
+			next unless $video_data;
+			my $target_file = catfile($target, $video_data->{title} . '.' . $video_data->{suffix} );
+			next if -e $target_file;
+			logger($d, "downloading $url to $target_file");
+			eval{$client->download( $url, { filename => $target_file } );}
+		}
+	}
+	
+	return 1;
+}
+
+sub logger {
+	my $level = shift;
+	my $message = shift;
+	print "$message\n" if $level;
+	return 1;
+}
+
+1;
+
+# * NOTE:
+# This portion of code, the package "WWWYouTubeDownload", is copied directly from
 # the CPAN module WWW::YouTube::Download by XAICRON (Yuji Shimada) and all credit goes to him.
 # I copied it here because there is an unfixed issue and it has not been updated on CPAN.
 # There are open pull requests waiting on GitHub and once any of them are merged and released via CPAN
@@ -370,51 +413,6 @@ sub user_id {
         return $1;
     }
     return $stuff;
-}
-
-1;
-
-# This is where the code by Michael LaGrasta begins
-package App::Automatan::Plugin::Action::YouTube;
-
-use strict;
-use warnings;
-use Moo;
-use File::Spec::Functions;
-
-use Data::Dumper;
-
-sub go {
-	my $self = shift;
-	my $in = shift;
-	my $bits = shift;
-	my $d = $in->{debug};
-	
-	my $target = $in->{target};
-	
-	foreach my $bit  (@$bits) {
-		my @urls = $bit =~ /http[s]?:\/\/www.youtube\.com\/watch\?v=.{11}/g;
-		foreach my $url (@urls) {
-			my $client = WWWYouTubeDownload->new();
-			my $video_data;
-			eval { $video_data = $client->prepare_download($url); }; warn "Error with $url\n".$@ if $@;
-			#TODO: Report errors
-			next unless $video_data;
-			my $target_file = catfile($target, $video_data->{title} . '.' . $video_data->{suffix} );
-			next if -e $target_file;
-			logger($d, "downloading $url to $target_file");
-			eval{$client->download( $url, { filename => $target_file } );}
-		}
-	}
-	
-	return 1;
-}
-
-sub logger {
-	my $level = shift;
-	my $message = shift;
-	print "$message\n" if $level;
-	return 1;
 }
 
 1;
