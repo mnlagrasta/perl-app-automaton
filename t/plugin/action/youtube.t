@@ -1,22 +1,26 @@
+use strict;
+use warnings;
 use Test::More;
-use Data::Dumper;
 
-use_ok( 'App::Automatan::Plugin::Action::YouTube');
-
+require_ok( 'App::Automatan::Plugin::Action::YouTube');
 
 my $conf = {
-    type => YouTube,
+    type => 'YouTube',
     target => '.'
 };
 
-my $queue = [
-	'https://www.youtube.com/watch?v=jTAPsVXLu1I',
-    #'https://www.youtube.com/watch?v=GD3y7ylpqO8',
-    #'https://www.youtube.com/watch?v=4XWHOAeuteI'
-];
-
 my $y = App::Automatan::Plugin::Action::YouTube->new();
+ok($y, 'new');
 
-ok($y->go($conf, $queue), 'Go');
+SKIP: {
+	skip "Skipping actual download tests", 1 unless $ENV{'AUTOMATAN_TEST_DOWNLOADS'};
+	
+	my $queue = [
+		'https://www.youtube.com/watch?v=jTAPsVXLu1I',
+		'https://www.youtube.com/watch?v=GD3y7ylpqO8',
+		'https://www.youtube.com/watch?v=4XWHOAeuteI'
+	];
+	ok($y->go($conf, $queue), 'Go');
+}
 
 done_testing();

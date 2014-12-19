@@ -1,7 +1,7 @@
 use Test::More;
 use Data::Dumper;
 
-use_ok( 'App::Automatan::Plugin::Action::NZB');
+require_ok( 'App::Automatan::Plugin::Action::NZB');
 
 
 my $conf = {
@@ -9,15 +9,24 @@ my $conf = {
     target => '.'
 };
 
-my $queue = [
-    'http://www.nzbsearch.net/nzb_get.aspx?mid=N8NTC',
-	'https://www.nzb-rss.com/nzb/32039-James.Mays.Man.Lab.S03E01.HDTV.x264-FTP.nzb',
-	'https://www.nzb-rss.com/nzb/32039-James.Mays.Man.Lab.S03E01.HDTV.x264-FTP?foo=bar&blee=blah'
-];
-
 my $y = App::Automatan::Plugin::Action::NZB->new();
+ok($y, 'new');
 
-ok($y->go($conf, $queue), 'Go');
+# get_name test
+my $name_input = 'https://abc!@#$%def^&*()ghi    jkl-_';
+my $name_expect = 'abc_____def_____ghi____jkl-_.nzb';
+my $name = App::Automatan::Plugin::Action::NZB::get_name($name_input);
+is($name, $name_expect, 'get_name');
+
+SKIP: {
+	skip "Skipping actual download tests", 1 unless $ENV{'AUTOMATAN_TEST_DOWNLOADS'};
+	
+	my $queue = [
+		'http://www.nzbsearch.net/nzb_get.aspx?mid=N8NTC',
+		'https://www.nzb-rss.com/nzb/32039-James.Mays.Man.Lab.S03E01.HDTV.x264-FTP.nzb'
+	];
+	ok($y->go($conf, $queue), 'Go');
+}
 
 done_testing();
 

@@ -34,9 +34,13 @@ my @expect = qw(
 );
 
 my $u = App::Automatan::Plugin::Filter::Unshorten->new();
+ok($u, 'new');
 
-ok($u->go($conf, \@queue), 'Go');
+SKIP: {
+	skip "Skipping actual download tests", 2 unless $ENV{'AUTOMATAN_TEST_DOWNLOADS'};
 
-is_deeply( \@queue, \@expect, 'unshorten');
+	ok($u->go($conf, \@queue), 'Go');
+	is_deeply( \@queue, \@expect, 'unshorten');
+}
 
 done_testing();
