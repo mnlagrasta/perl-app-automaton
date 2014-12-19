@@ -47,31 +47,6 @@ The plugins can be appear multiple times in a config file, or left out completel
 In the future, I picture giving it input that could tell it to do more interesting things. However, as long as commands are coming in over email, I'll leave the security implications minimal.
 Obviously, you don't have to use that plugin. If you do, I certainly suggest not using your primary email since the password must be in the config file.
 
-# METHODS
-
-## load\_conf
-
-Loads a YAML configuration from object variables. Checks in the following order:
-1) conf : Just accepts it, since it was passed in as a hash
-2) yaml\_conf : parses a YAML string into conf hash
-3) conf\_file : reads and parses the supplied file into conf hash
-
-## check\_sources
-
-Iterates through configured sources to populate queue
-
-## apply\_filters
-
-Iterates through filters and applies changes to queue
-
-## dedupe
-
-Removes duplicate entries from the queue
-
-## do\_actions
-
-Iterates through the configured action plugins, executing each one on the entire queue
-
 # INSTALLATION
 
 If you are working directly from source, this module can be installed using the Dist::Zilla tools:
@@ -157,6 +132,31 @@ This is the first release and the project is in it's very early stages. Here's w
     * Evaluate security concerns on an action plugin that executes more generic commands. Perhaps limit it to certain input types or require a key in the input string.
     * Figure out some better tests. It's awkward to download real files during testing. Also, how to test the IMAP plugin?
     * Package it up and put it on CPAN (after PrePan probably)
+
+# METHODS
+
+- load\_conf
+
+    Loads a YAML configuration from object variables. Checks in the following order:
+    1) conf : Just accepts it, since it was passed in as a hash
+    2) yaml\_conf : parses a YAML string into conf hash
+    3) conf\_file : reads and parses the supplied file into conf hash
+
+- check\_sources
+
+    Iterates through configured sources to populate queue
+
+- apply\_filters
+
+    Iterates through filters and applies changes to queue
+
+- dedupe
+
+    Removes duplicate entries from the queue
+
+- do\_actions
+
+    Iterates through the configured action plugins, executing each one on the entire queue
 
 # AUTHOR
 

@@ -248,25 +248,31 @@ or just use the shell utility:
 
 	automatan
 
-=method load_conf
+=head1 METHODS
+
+=over 4
+
+=item load_conf
 
 Loads a YAML configuration from object variables. Checks in the following order:
 1) conf : Just accepts it, since it was passed in as a hash
 2) yaml_conf : parses a YAML string into conf hash
 3) conf_file : reads and parses the supplied file into conf hash
 
-=method check_sources
+=item check_sources
 
 Iterates through configured sources to populate queue
 
-=method apply_filters
+=item apply_filters
 
 Iterates through filters and applies changes to queue
 
-=method dedupe
+=item dedupe
 
 Removes duplicate entries from the queue
 
-=method do_actions
+=item do_actions
 
 Iterates through the configured action plugins, executing each one on the entire queue
+
+=back
