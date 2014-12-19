@@ -25,9 +25,9 @@ sub go {
 		
 		foreach my $url (@urls) {
 			next unless $url;
-			my $name = $self->get_name($url);
+			my $name = get_name($url);
 			logger($d, "getting links for $url");
-			my $new_url = $self->get_link($url);
+			my $new_url = get_link($url);
 			#TODO: what if url is undef?'
 			die "could not determine new url for $url" unless $new_url;
 			my $target_file = catfile($target, $name);
@@ -43,7 +43,6 @@ sub go {
 }
 
 sub get_link {
-	my $self = shift;
 	my $url = shift;
 
 	my @links = off( $url, video_file => 1 );
@@ -61,7 +60,6 @@ sub get_link {
 }
 
 sub get_name {
-	my $self = shift;
 	my $uri = shift;
 
 	my $name = ( split( /\//, $uri ) )[-1];

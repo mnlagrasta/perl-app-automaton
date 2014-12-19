@@ -26,7 +26,7 @@ sub go {
 	foreach my $bit (@$bits) {
 		my @urls = $bit =~ /$pattern_string/g;
 		foreach my $url (@urls) {
-			my $name = $self->get_name($url);
+			my $name = get_name($url);
 			my $target_file = catfile($target, $name);
 			next if -e $target_file;
 			my $ua = LWP::UserAgent->new();
@@ -39,7 +39,6 @@ sub go {
 }
 
 sub get_name {
-	my $self = shift;
 	my $uri = shift;
 
 	my $name = (split(/\//, $uri))[-1];
