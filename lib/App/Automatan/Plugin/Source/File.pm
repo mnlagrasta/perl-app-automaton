@@ -9,7 +9,6 @@ use Moo;
 sub go {
     my $self = shift;
     my $in = shift;
-    my $parent = shift;
 	
 	my $d = $in->{debug};
 
