@@ -4,7 +4,7 @@ App::Automatan - Execute various tasks based on input from various sources
 
 # VERSION
 
-version 0.143530
+version 0.143560
 
 # SYNOPSIS
 
@@ -71,6 +71,7 @@ Once installed, you will have to create a configuration file for Automatan to op
                 type: File
                 path: ../input.txt
                 delete: 0
+                empty: 1
         filters:
           unshorten:
                 type: Unshorten
@@ -157,6 +158,11 @@ This is the first release and the project is in it's very early stages. Here's w
 - do\_actions
 
     Iterates through the configured action plugins, executing each one on the entire queue
+
+- logger
+
+    Output messages if debug level is sufficient. Currently only a boolean check on this value.
+    Expects input: numeric debug level, string message
 
 # AUTHOR
 

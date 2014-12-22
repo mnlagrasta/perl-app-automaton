@@ -15,8 +15,8 @@ ok($y, 'new');
 # get_name test
 my $name_input = 'https://abc!@#$%def^&*()ghi    jkl-_';
 my $name_expect = 'abc_____def_____ghi____jkl-_.nzb';
-my $name = App::Automatan::Plugin::Action::NZB::get_name($name_input);
-is($name, $name_expect, 'get_name');
+my $name = App::Automatan::Plugin::Action::NZB::_get_name($name_input);
+is($name, $name_expect, '_get_name');
 
 SKIP: {
 	skip "Skipping actual download tests", 1 unless $ENV{'AUTOMATAN_TEST_DOWNLOADS'};

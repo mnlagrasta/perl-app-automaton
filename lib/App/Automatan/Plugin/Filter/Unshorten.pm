@@ -29,23 +29,23 @@ sub go {
 	my $pattern_string = join('|', @patterns);
 	
 	foreach my $bit (@$bits) {
-		$bit =~ s/($pattern_string)/unshorten($d, $1)/eg;
+		$bit =~ s/($pattern_string)/_unshorten($d, $1)/eg;
 	}
 
 	return 1;
 }
 
-sub unshorten {
+sub _unshorten {
 	my $d = shift;
 	my $input = shift;
 	my $ua = LWP::UserAgent->new;
 	my $r = $ua->head($input);
 	my $new_url = $r->base;
-	logger($d, "Expanding $input to $new_url");
+	_logger($d, "Expanding $input to $new_url");
 	return $new_url;
 }
 
-sub logger {
+sub _logger {
 	my $level = shift;
 	my $message = shift;
 	print "$message\n" if $level;
@@ -70,6 +70,16 @@ It currently supports the following shortening services:
  * Trim tr.im
  * YouTube youtu.be
  * Ted.com t.ted.com
+
+=head1 METHODS
+
+=over 4
+
+=item go
+
+Executes the plugin. Expects input: conf as hashref, queue as arrayref
+
+=back
 
 =head1 SEE ALSO
 

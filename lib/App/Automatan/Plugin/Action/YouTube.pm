@@ -27,7 +27,7 @@ sub go {
 			next unless $video_data;
 			my $target_file = catfile($target, $video_data->{title} . '.' . $video_data->{suffix} );
 			next if -e $target_file;
-			logger($d, "downloading $url to $target_file");
+			_logger($d, "downloading $url to $target_file");
 			eval{$client->download( $url, { filename => $target_file } );}
 		}
 	}
@@ -35,7 +35,7 @@ sub go {
 	return 1;
 }
 
-sub logger {
+sub _logger {
 	my $level = shift;
 	my $message = shift;
 	print "$message\n" if $level;
@@ -424,6 +424,16 @@ __END__
 This module is intended to be used from within the App::Automatan application.
 
 It identifies and downloads links from youtube.com.
+
+=head1 METHODS
+
+=over 4
+
+=item go
+
+Executes the plugin. Expects input: conf as hashref, queue as arrayref
+
+=back
 
 =head1 SEE ALSO
 

@@ -276,4 +276,11 @@ Removes duplicate entries from the queue
 
 Iterates through the configured action plugins, executing each one on the entire queue
 
+=item logger
+
+Output messages if debug level is sufficient. Currently only a boolean check on this value.
+Expects input: numeric debug level, string message
+
 =back
+
+=for Pod::Coverage BUILD conf conf_file debug found_bits yaml_conf

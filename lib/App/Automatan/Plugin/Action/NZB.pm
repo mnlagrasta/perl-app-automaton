@@ -26,11 +26,11 @@ sub go {
 	foreach my $bit (@$bits) {
 		my @urls = $bit =~ /$pattern_string/g;
 		foreach my $url (@urls) {
-			my $name = get_name($url);
+			my $name = _get_name($url);
 			my $target_file = catfile($target, $name);
 			next if -e $target_file;
 			my $ua = LWP::UserAgent->new();
-			logger($d, "downloading $url to $target_file");
+			_logger($d, "downloading $url to $target_file");
 			$ua->mirror($url, $target_file);
 		}
 	}
@@ -38,7 +38,7 @@ sub go {
     return(1);
 }
 
-sub get_name {
+sub _get_name {
 	my $uri = shift;
 
 	my $name = (split(/\//, $uri))[-1];
@@ -54,7 +54,7 @@ sub get_name {
 	return $name;
 }
 
-sub logger {
+sub _logger {
 	my $level = shift;
 	my $message = shift;
 	print "$message\n" if $level;
@@ -73,6 +73,16 @@ It identifies and downloads links from the following newsgroup search services:
  * www.nzb-rss.com
  * www.nzbsearch.net
 
+=head1 METHODS
+
+=over 4
+
+=item go
+
+Executes the plugin. Expects input: conf as hashref, queue as arrayref
+
+=back
+ 
 =head1 SEE ALSO
 
 L<App::Automatan>

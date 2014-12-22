@@ -13,20 +13,20 @@ sub go {
 	my $d = $in->{debug};
 
     my $file = $in->{path};
-	logger($d, "Processing file: $file");
+	_logger($d, "Processing file: $file");
     open(my $fh, "<", $in->{path}) || return 1;
     my @lines = <$fh>;
     close($fh);
 	
 	if ($in->{empty}) {
-		logger($d, "emptying the file: $file");
+		_logger($d, "emptying the file: $file");
 		open(my $fh, '>', $in->{path});
 		print $fh '';
 		close($fh);
 	}
 	
 	if ($in->{delete}) {
-		logger($d, "deleting file: $file");
+		_logger($d, "deleting file: $file");
 		unlink $file;
 	}
 	
@@ -35,7 +35,7 @@ sub go {
     return(@lines);
 }
 
-sub logger {
+sub _logger {
 	my $level = shift;
 	my $message = shift;
 	print "$message\n" if $level;
@@ -51,6 +51,16 @@ __END__
 This module is intended to be used from within the App::Automatan application.
 
 It retrieves lines from a file and adds them to the queue to be processed.
+
+=head1 METHODS
+
+=over 4
+
+=item go
+
+Executes the plugin. Expects input: conf as hashref
+
+=back
 
 =head1 SEE ALSO
 

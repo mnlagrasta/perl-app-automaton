@@ -30,9 +30,9 @@ sub go {
 
 	# Get messages
 	my $nm = $imap->select('INBOX');
-	logger($d, "Found $nm messages");
+	_logger($d, "Found $nm messages");
 	for ( my $i = 1; $i <= $nm; $i++ ) {
-		logger($d, "getting message $i");
+		_logger($d, "getting message $i");
 		#my $message = $imap->get( $i, 2 ) || $imap->get($i);
 		my $message = $imap->get($i);
 		die("imap message undef") unless defined $message;
@@ -41,7 +41,7 @@ sub go {
 		
 		if ($in->{delete}) {
 			# delete message
-			logger($d, "Deleting message $i");
+			_logger($d, "Deleting message $i");
 			$imap->delete($i);
 		}
 		
@@ -51,7 +51,7 @@ sub go {
 }
 
 
-sub logger {
+sub _logger {
 	my $level = shift;
 	my $message = shift;
 	print "$message\n" if $level;
@@ -67,6 +67,16 @@ __END__
 This module is intended to be used from within the App::Automatan application.
 
 It retrieves messages from an IMAP email account and adds them to the queue to be processed.
+
+=head1 METHODS
+
+=over 4
+
+=item go
+
+Executes the plugin. Expects input: conf as hashref, queue as arrayref
+
+=back
 
 =head1 SEE ALSO
 
