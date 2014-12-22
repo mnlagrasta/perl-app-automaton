@@ -30,3 +30,9 @@ $a->check_sources();
 $a->apply_filters();
 $a->dedupe();
 $a->do_actions();
+
+=head1 OVERVIEW
+
+For more information please see L<App::Automatan>
+
+=cut
