@@ -18,6 +18,13 @@ sub go {
     my @lines = <$fh>;
     close($fh);
 	
+	if ($in->{empty}) {
+		logger($d, "emptying the file: $file");
+		open(my $fh, '>', $in->{path});
+		print $fh '';
+		close($fh);
+	}
+	
 	if ($in->{delete}) {
 		logger($d, "deleting file: $file");
 		unlink $file;

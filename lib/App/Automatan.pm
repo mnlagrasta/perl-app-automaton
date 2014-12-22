@@ -173,6 +173,7 @@ Once installed, you will have to create a configuration file for Automatan to op
 		type: File
 		path: ../input.txt
 		delete: 0
+		empty: 1
 	filters:
 	  unshorten:
 		type: Unshorten
