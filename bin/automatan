@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 
-# PODNAME: App::Automatan
+# PODNAME: automatan
 
 # ABSTRACT: shell script wrapper for App::Automatan
 
