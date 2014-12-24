@@ -1,4 +1,4 @@
-package App::Automatan::Plugin::Filter::Unshorten;
+package App::Automaton::Plugin::Filter::Unshorten;
 
 # ABSTRACT: Expansion of shortneded URLs
 
@@ -58,7 +58,7 @@ __END__
 
 =head1 SYNOPSIS
 
-This module is intended to be used from within the App::Automatan application.
+This module is intended to be used from within the App::Automaton application.
 
 It expands shortened URLs to their full size so that other modules may identify them.
 It currently supports the following shortening services:
@@ -83,4 +83,4 @@ Executes the plugin. Expects input: conf as hashref, queue as arrayref
 
 =head1 SEE ALSO
 
-L<App::Automatan>
+L<App::Automaton>

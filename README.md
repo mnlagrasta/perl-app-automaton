@@ -1,6 +1,6 @@
 # NAME
 
-App::Automatan - Execute various tasks based on input from various sources
+App::Automaton - Execute various tasks based on input from various sources
 
 # VERSION
 
@@ -8,7 +8,7 @@ version 0.143561
 
 # SYNOPSIS
 
-        my $a = App::Automatan->new(conf_file => $conf_file);
+        my $a = App::Automaton->new(conf_file => $conf_file);
         $a->check_sources();
         $a->apply_filters();
         $a->dedupe();
@@ -16,7 +16,7 @@ version 0.143561
 
 or just use the shell utility:
 
-        automatan
+        automaton
 
 # DESCRIPTION
 
@@ -25,7 +25,7 @@ The not so ambitious first step is to receive URLs from various sources and down
 
 The core concepts are as follows:
 
-Automatan is designed to run periodically from Cron or something similar. Although, there is no reason you couldn't just run it manually.
+Automaton is designed to run periodically from Cron or something similar. Although, there is no reason you couldn't just run it manually.
 It will gather input from it's input plugins, pass it through any specified filter plugins, and pass it on to it's action plugins.
 The action plugins will parse each line of the input and execute any appropriate actions. The input will then be passed on to the next action plugin.
 
@@ -55,10 +55,10 @@ If you are working directly from source, this module can be installed using the 
 
 # CONFIGURATION
 
-Once installed, you will have to create a configuration file for Automatan to operate on. Here is a sample config file that uses all of the currently available plugins.
+Once installed, you will have to create a configuration file for Automaton to operate on. Here is a sample config file that uses all of the currently available plugins.
 
         sources:
-          automatan email:
+          automaton email:
                 bypass: 1
                 type: IMAP
                 server: imap.gmail.com
@@ -95,7 +95,7 @@ The config that appears within the named section is passed on to that plugin dur
 
 Here is a commented example of an IMAP plugin:
 
-    automatan email: # name, can be anything unique within it's section
+    automaton email: # name, can be anything unique within it's section
       bypass: 1 # OPTIONAL; if true, this plugin will be skipped, defaults to false
       type: IMAP # plguin type: This is how it finds the plugin code, case sensitive
       delete: 0 # OPTIONAL; if true, messages will be deleted after reading, defaults to false
@@ -120,8 +120,8 @@ Feel free to create additional plugins. I'm currently re-evaluating this, but th
 
 # EXECUTION
 
-Once it's installed and you have a config file, you can run it using the "automatan" wrapper script.
-By default, it will look for a config file named '.automatan' in your home directory. You can also specify a config file using the -c filename parameter. You can also get some verbose output with -v, but there isn't much there yet.
+Once it's installed and you have a config file, you can run it using the "automaton" wrapper script.
+By default, it will look for a config file named '.automaton' in your home directory. You can also specify a config file using the -c filename parameter. You can also get some verbose output with -v, but there isn't much there yet.
 
 # TODO
 

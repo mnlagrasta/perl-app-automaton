@@ -2,14 +2,14 @@ use strict;
 use warnings;
 use Test::More;
 
-require_ok( 'App::Automatan::Plugin::Action::YouTube');
+require_ok( 'App::Automaton::Plugin::Action::YouTube');
 
 my $conf = {
     type => 'YouTube',
     target => '.'
 };
 
-my $y = App::Automatan::Plugin::Action::YouTube->new();
+my $y = App::Automaton::Plugin::Action::YouTube->new();
 ok($y, 'new');
 
 SKIP: {

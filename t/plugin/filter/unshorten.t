@@ -4,7 +4,7 @@ use Data::Dumper;
 use strict;
 use warnings;
 
-require_ok( 'App::Automatan::Plugin::Filter::Unshorten');
+require_ok( 'App::Automaton::Plugin::Filter::Unshorten');
 
 
 my $conf = {
@@ -33,7 +33,7 @@ my @expect = qw(
 	https://www.youtube.com/watch?v=KVFkWWvMIpM
 );
 
-my $u = App::Automatan::Plugin::Filter::Unshorten->new();
+my $u = App::Automaton::Plugin::Filter::Unshorten->new();
 ok($u, 'new');
 
 SKIP: {

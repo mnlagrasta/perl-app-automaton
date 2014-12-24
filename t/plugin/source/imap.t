@@ -4,7 +4,7 @@ use Data::Dumper;
 use strict;
 use warnings;
 
-require_ok( 'App::Automatan::Plugin::Source::IMAP');
+require_ok( 'App::Automaton::Plugin::Source::IMAP');
 
 my $conf = {
 	'password' => 'goodpassword',
@@ -15,6 +15,6 @@ my $conf = {
 	'account'  => 'notyourprimary@email.com'
 };
 
-ok(App::Automatan::Plugin::Source::IMAP->new(), 'new');
+ok(App::Automaton::Plugin::Source::IMAP->new(), 'new');
 
 done_testing();

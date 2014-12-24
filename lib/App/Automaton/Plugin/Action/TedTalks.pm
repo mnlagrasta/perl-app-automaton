@@ -1,4 +1,4 @@
-package App::Automatan::Plugin::Action::TedTalks;
+package App::Automaton::Plugin::Action::TedTalks;
 
 # ABSTRACT: Download module for Ted Talk videos
 
@@ -89,7 +89,7 @@ __END__
 
 =head1 SYNOPSIS
 
-This module is intended to be used from within the App::Automatan application.
+This module is intended to be used from within the App::Automaton application.
 
 It identifies and downloads links from the Ted Talks website www.ted.com.
 This is done with the help of the www.offliberty.com service, which returns
@@ -107,4 +107,4 @@ Executes the plugin. Expects input: conf as hashref, queue as arrayref
 
 =head1 SEE ALSO
 
-L<App::Automatan>
+L<App::Automaton>

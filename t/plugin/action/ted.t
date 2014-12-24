@@ -1,7 +1,7 @@
 use Test::More;
 use Data::Dumper;
 
-require_ok( 'App::Automatan::Plugin::Action::TedTalks');
+require_ok( 'App::Automaton::Plugin::Action::TedTalks');
 
 
 my $conf = {
@@ -9,12 +9,12 @@ my $conf = {
     target => '.'
 };
 
-my $y = App::Automatan::Plugin::Action::TedTalks->new();
+my $y = App::Automaton::Plugin::Action::TedTalks->new();
 ok($y, 'new');
 
 
 is(
-	App::Automatan::Plugin::Action::TedTalks::_get_name('http://www.ted.com/talks/paola_antonelli_why_i_brought_pacman_to_moma'),
+	App::Automaton::Plugin::Action::TedTalks::_get_name('http://www.ted.com/talks/paola_antonelli_why_i_brought_pacman_to_moma'),
 	'paola_antonelli_why_i_brought_pacman_to_moma.mp4',
 	'_get_name'
 );
@@ -22,7 +22,7 @@ is(
 SKIP: {
 	skip "Skipping actual download tests", 2 unless $ENV{'AUTOMATAN_TEST_DOWNLOADS'};
 
-	my $l = App::Automatan::Plugin::Action::TedTalks::_get_link('http://www.ted.com/talks/paola_antonelli_why_i_brought_pacman_to_moma');
+	my $l = App::Automaton::Plugin::Action::TedTalks::_get_link('http://www.ted.com/talks/paola_antonelli_why_i_brought_pacman_to_moma');
 	is($l, 'http://download.ted.com/talks/PaolaAntonelli_2013S-480p.mp4', '_get_link' );
 
 	my $queue = [

@@ -1,4 +1,4 @@
-package App::Automatan::Plugin::Source::File;
+package App::Automaton::Plugin::Source::File;
 
 # ABSTRACT: File input module
 
@@ -48,7 +48,7 @@ __END__
 
 =head1 SYNOPSIS
 
-This module is intended to be used from within the App::Automatan application.
+This module is intended to be used from within the App::Automaton application.
 
 It retrieves lines from a file and adds them to the queue to be processed.
 
@@ -64,4 +64,4 @@ Executes the plugin. Expects input: conf as hashref
 
 =head1 SEE ALSO
 
-L<App::Automatan>
+L<App::Automaton>

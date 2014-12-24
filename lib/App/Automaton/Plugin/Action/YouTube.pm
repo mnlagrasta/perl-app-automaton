@@ -1,4 +1,4 @@
-package App::Automatan::Plugin::Action::YouTube;
+package App::Automaton::Plugin::Action::YouTube;
 
 # ABSTRACT: Download module for YouTube videos
 
@@ -421,7 +421,7 @@ __END__
 
 =head1 SYNOPSIS
 
-This module is intended to be used from within the App::Automatan application.
+This module is intended to be used from within the App::Automaton application.
 
 It identifies and downloads links from youtube.com.
 
@@ -437,4 +437,4 @@ Executes the plugin. Expects input: conf as hashref, queue as arrayref
 
 =head1 SEE ALSO
 
-L<App::Automatan>
+L<App::Automaton>

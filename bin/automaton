@@ -1,13 +1,13 @@
 #!/usr/bin/perl
 
-# PODNAME: automatan
+# PODNAME: automaton
 
-# ABSTRACT: shell script wrapper for App::Automatan
+# ABSTRACT: shell script wrapper for App::Automaton
 
 use strict;
 use warnings;
 
-use App::Automatan;
+use App::Automaton;
 use Getopt::Std;
 use File::HomeDir;
 use File::Spec::Functions;
@@ -22,10 +22,10 @@ my $conf_file;
 if ($opts->{c}) {
     $conf_file = $opts->{c};
 } else {
-	$conf_file = catfile( File::HomeDir->my_home, '.automatan' );
+	$conf_file = catfile( File::HomeDir->my_home, '.automaton' );
 }
 
-my $a = App::Automatan->new(conf_file => $conf_file, debug => $opts->{v});
+my $a = App::Automaton->new(conf_file => $conf_file, debug => $opts->{v});
 $a->check_sources();
 $a->apply_filters();
 $a->dedupe();
@@ -33,6 +33,6 @@ $a->do_actions();
 
 =head1 OVERVIEW
 
-For more information please see L<App::Automatan>
+For more information please see L<App::Automaton>
 
 =cut

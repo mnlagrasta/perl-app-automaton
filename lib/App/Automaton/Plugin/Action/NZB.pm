@@ -1,4 +1,4 @@
-package App::Automatan::Plugin::Action::NZB;
+package App::Automaton::Plugin::Action::NZB;
 
 # ABSTRACT: Download module for nzb files
 
@@ -67,7 +67,7 @@ __END__
 
 =head1 SYNOPSIS
 
-This module is intended to be used from within the App::Automatan application.
+This module is intended to be used from within the App::Automaton application.
 
 It identifies and downloads links from the following newsgroup search services:
  * www.nzb-rss.com
@@ -85,4 +85,4 @@ Executes the plugin. Expects input: conf as hashref, queue as arrayref
  
 =head1 SEE ALSO
 
-L<App::Automatan>
+L<App::Automaton>

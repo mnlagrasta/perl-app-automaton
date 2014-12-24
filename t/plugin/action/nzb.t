@@ -1,7 +1,7 @@
 use Test::More;
 use Data::Dumper;
 
-require_ok( 'App::Automatan::Plugin::Action::NZB');
+require_ok( 'App::Automaton::Plugin::Action::NZB');
 
 
 my $conf = {
@@ -9,13 +9,13 @@ my $conf = {
     target => '.'
 };
 
-my $y = App::Automatan::Plugin::Action::NZB->new();
+my $y = App::Automaton::Plugin::Action::NZB->new();
 ok($y, 'new');
 
 # get_name test
 my $name_input = 'https://abc!@#$%def^&*()ghi    jkl-_';
 my $name_expect = 'abc_____def_____ghi____jkl-_.nzb';
-my $name = App::Automatan::Plugin::Action::NZB::_get_name($name_input);
+my $name = App::Automaton::Plugin::Action::NZB::_get_name($name_input);
 is($name, $name_expect, '_get_name');
 
 SKIP: {

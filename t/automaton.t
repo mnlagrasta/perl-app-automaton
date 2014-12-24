@@ -3,11 +3,11 @@ use warnings;
 use Test::More;
 use File::Temp qw( tempfile );
 
-require_ok( 'App::Automatan' );
+require_ok( 'App::Automaton' );
 
 my $yaml_conf = <<EOF;
 sources:
-  automatan email:
+  automaton email:
     type: IMAP
     server: imap.gmail.com
     port: 993
@@ -24,7 +24,7 @@ EOF
 
 my $conf = {
 	'sources' => {
-		'automatan email' => {
+		'automaton email' => {
 			'password' => 'goodpassword',
 			'server'   => 'imap.gmail.com',
 			'type'     => 'IMAP',
@@ -44,14 +44,14 @@ my $conf = {
 };
 
 # loading conf from yaml string
-my $a1 = App::Automatan->new( yaml_conf => $yaml_conf );
+my $a1 = App::Automaton->new( yaml_conf => $yaml_conf );
 is_deeply( $conf, $a1->conf(), 'yaml string config' );
 
 # load config from yaml file
 my ($a2_fh, $a2_filename) = tempfile();
 print($a2_fh $yaml_conf);
 close($a2_fh);
-my $a2 = App::Automatan->new( conf_file => $a2_filename );
+my $a2 = App::Automaton->new( conf_file => $a2_filename );
 is_deeply( $conf, $a2->conf(), 'yaml file config');
 
 #TODO: test bad/non-existant conf file

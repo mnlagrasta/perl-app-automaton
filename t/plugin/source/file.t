@@ -5,7 +5,7 @@ use strict;
 use warnings;
 use File::Temp qw( tempfile );
 
-require_ok( 'App::Automatan::Plugin::Source::File');
+require_ok( 'App::Automaton::Plugin::Source::File');
 
 #my $filename = File::Temp::tempnam();
 my ($fh, $filename) = tempfile();
@@ -31,7 +31,7 @@ my @queue = qw(
 print $fh join("\n", @queue);
 close($fh);
 
-my $f1 = App::Automatan::Plugin::Source::File->new();
+my $f1 = App::Automaton::Plugin::Source::File->new();
 my @r = $f1->go($conf);
 
 is_deeply(\@r, \@queue, 'Read input file');
@@ -39,7 +39,7 @@ is_deeply(\@r, \@queue, 'Read input file');
 ok(-e $filename, 'File not deleted');
 
 $conf->{delete} = 1;
-my $f2 = App::Automatan::Plugin::Source::File->new();
+my $f2 = App::Automaton::Plugin::Source::File->new();
 $f2->go($conf);
 ok(!(-e $filename), 'File deleted');
 
