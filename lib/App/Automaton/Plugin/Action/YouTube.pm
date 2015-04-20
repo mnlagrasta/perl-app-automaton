@@ -8,6 +8,8 @@ use Moo;
 use File::Spec::Functions;
 use WWW::YouTube::Download 0.57;
 
+our $VERSION = '0.57';
+
 use Data::Dumper;
 
 sub go {
